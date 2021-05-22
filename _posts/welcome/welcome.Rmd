@@ -6,7 +6,7 @@ description: |
 author:
   - name: Yeo Chia Guan Andy
     url: https://example.com/norajones
-    affiliation: Spacely Sprockets
+    affiliation: Singapore Management University
     affiliation_url: https://example.com/spacelysprokets
 date: 05-22-2021
 output:
