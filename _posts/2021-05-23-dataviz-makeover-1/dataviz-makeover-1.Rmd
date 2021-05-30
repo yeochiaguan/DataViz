@@ -1,7 +1,7 @@
 ---
 title: "DataViz Makeover #1"
 description: |
-  This is my submission for the Daat Viz Makeover Assignment for ISSS608 Visual Analytics and Applications
+  This is my submission for the Data Viz Makeover Assignment for ISSS608 Visual Analytics and Applications
 author:
   - name: Yeo Chia Guan Andy
     url: https://github.com/yeochiaguan
