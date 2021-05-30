@@ -75,8 +75,6 @@ The data visualization below is created using the data provided by Department of
 # 3.0 Proposed Design
 
 ![](img/Proposed Sketch.JPG)
-
-
 *Figure 1. Proposed Design Sketch*
 
 
