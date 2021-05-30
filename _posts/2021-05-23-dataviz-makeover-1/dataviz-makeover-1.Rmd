@@ -241,7 +241,7 @@ The percentage change was inserted into the Tooltip.
 
 # 6.0 Final Output
 
-To improve the aesthetics of the visualization, different colors are assigned to each country for ease of comparing the relative position of the country in 2019 and 2020. The field label *Month-Year* was also hidden.The final sheet was placed onto the dashboard as shown below.
+To improve the aesthetics of the visualization, different colors are assigned to each country for ease of comparing the relative position of the country in 2019 and 2020. Gridlines were also made fainter in contrast to increase emphasis on data points. The field label *Month-Year* was also hidden.The final sheet was placed onto the dashboard as shown below.
 
 ![](img/Final Output.PNG)
 *Figure 24. Final Output Visualization*
