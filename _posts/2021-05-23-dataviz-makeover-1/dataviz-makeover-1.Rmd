@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * [2.0 Critic and Suggestion for current graph]
     + [2.1 Clarity]
-    + [2.2 Aestatics]
+    + [2.2 Aesthetics]
 
 * [3.0 Proposed Design]
 
@@ -62,7 +62,7 @@ The data visualization below is created using the data provided by Department of
 
 
 
-## 2.2 Aestatics
+## 2.2 Aesthetics
 
   S/N |       Critique          |  Suggestion
 ------|-------------------------|------------------
