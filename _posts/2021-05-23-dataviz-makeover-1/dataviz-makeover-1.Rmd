@@ -78,7 +78,6 @@ The data visualization below is created using the data provided by Department of
 *Figure 1. Proposed Design Sketch*
 
 
-
 ## Design Objective
 
   S/N |   Proposed Design Objective      
@@ -88,11 +87,9 @@ The data visualization below is created using the data provided by Department of
   3   | The proposed design will provide more details on the exact import and export values for each country for each year.
 
 
-
 # 4.0 Data Preparation
 
 The data is taken from the Department of Statistics, Singapore (DOS) on the Merchandise Imports and Exports by Region/Market.
-
 
 
 ## 4.1 Remove Unused Rows
