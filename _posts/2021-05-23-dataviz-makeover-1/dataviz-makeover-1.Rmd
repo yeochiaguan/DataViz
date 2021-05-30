@@ -1,11 +1,11 @@
 ---
 title: "DataViz Makeover #1"
 description: |
-  A short description of the post.
+  This is my submission for the Daat Viz Makeover Assignment for ISSS608 Visual Analytics and Applications
 author:
   - name: Yeo Chia Guan Andy
     url: https://github.com/yeochiaguan
-date: 05-23-2021
+date: 05-30-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -75,6 +75,8 @@ The data visualization below is created using the data provided by Department of
 # 3.0 Proposed Design
 
 ![](img/Proposed Sketch.JPG)
+
+
 *Figure 1. Proposed Design Sketch*
 
 
@@ -248,6 +250,7 @@ To improve the aesthetics of the visualization, different colors are assigned to
 
 ![](img/Final Output.PNG)
 *Figure 24. Final Output Visualization*
+
 
 
 ## 6.1 Insights
