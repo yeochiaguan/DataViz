@@ -1,0 +1,261 @@
+---
+title: "DataViz Makeover #1"
+description: |
+  A short description of the post.
+author:
+  - name: Yeo Chia Guan Andy
+    url: https://github.com/yeochiaguan
+date: 05-23-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Content
+
+* [1.0 Original Visualization]
+
+* [2.0 Critic and Suggestion for current graph]
+    + [2.1 Clarity]
+    + [2.2 Aestatics]
+
+* [3.0 Proposed Design]
+
+* [4.0 Data Preparation]
+    + [4.1 Remove Unused Rows]
+    + [4.2 Removing Unused Columns]
+    + [4.3 Renaming Sheet]
+    + [4.4 Edit Relationship]
+    + [4.5 Edit Data Type]
+    + [4.6 Pivot Data]
+
+* [5.0 Building the Visualization]
+    + [5.1 Details and Labels]
+    + [5.2 Tooltip]
+    + [5.3 Improving Clarity in Values and Percentage Change]
+
+* [6.0 Final Output]
+    + [6.1 Insights]
+    
+***
+# 1.0 Original Visualization
+
+The data visualization below is created using the data provided by Department of Statistics, Singapore (DOS) on the Merchandise Trade by Region/Market. The visualization shows the import and export for the top six trading countries from 2019 to 2020.
+
+![](img/Merchandise Trade of Top Six Trading Countries, 2019 - 2020.png)
+
+# 2.0 Critic and Suggestion for current graph
+
+## 2.1 Clarity
+
+  S/N |       Critique          |  Suggestion
+------|-------------------------|------------------
+  1   | The line chart for the import and export for each region is not clear as the colors are overlapping one another. An example is the export for Mainland China where the lines are covered by the import. | Line graph with no fill can be used instead to prevent overlapping of colors
+  2   | There is no clear intent of the charts. The charts merely shows two lines on the trend of the import and export for each region without a clear intent where the comparison was. | The key points of the charts can be highlighted. An example will be to indicate the value of the highest export or import for each region for a particular year.
+  3   | The scale of the charts are inconsistent for each country. Mainland China has a upper bound for the export at 8M and import at 6M while Taiwan has a upper bound of export at 2M and export at 4M. | The scales should be consistent for each chart to clearly show the difference between each region.
+  4   | There is a mismatch between data and the title where the title labeled the chart to be the Merchandised Trade of Top Six Trading Countries from 2019 to 2020, but the data shows till 2021. | The charts should be consistent to show data for the same period.
+
+
+
+## 2.2 Aestatics
+
+  S/N |       Critique          |  Suggestion
+------|-------------------------|------------------
+  1   | The line chart for the export for each region are covered by the import due to the colors fill. An example is the export for Mainland China where the lines are covered by the import. | Line graph with no fill can be used instead to prevent overlapping of colors
+  2   | The width of the charts are inconsistent and misaligned when comparing for each country. An example would be Taiwan which has a smaller width as compared to Mainland China. | The width can be kept consistent for each chart.
+  3   | The import and export labels are not easy to read with the scales on the left and right side of the chart | The import data can be plotted against the export for each country for each year from 2019 to 2020 with the values shown on the data point
+
+
+
+# 3.0 Proposed Design
+
+![](img/Proposed Sketch.JPG)
+*Figure 1. Proposed Design Sketch*
+
+
+
+## Design Objective
+
+  S/N |   Proposed Design Objective      
+------|----------------------------
+  1   | The proposed design intends to show the import against export for each country under a single chart for better clarity on the relative position, thus avoiding the issue of charts misalignment
+  2   | The proposed design will show the import and export data for 2019 and 2020 separately to show the changes in relative position for each country from 2019 to 2020.
+  3   | The proposed design will provide more details on the exact import and export values for each country for each year.
+
+
+
+# 4.0 Data Preparation
+
+The data is taken from the Department of Statistics, Singapore (DOS) on the Merchandise Imports and Exports by Region/Market.
+
+
+
+## 4.1 Remove Unused Rows
+
+Within the excel sheet, the rows 1 to 5 are do not contain any useful data for both the import and export data, hence these rows are removed. In addition, as we are interested in improving the original Visualization, only the top 6 countries 1) Hong Kong, 2) Mainland China, 3) Japan, 4) Malaysia, 5) Taiwan and 6) US, not sorted in any order are kept, while data from the other countries are excluded.
+
+![](img/Remove Rows Less Top 6.PNG)
+*Figure 2. Removing All Rows Less Top 6 Countries*
+
+
+![](img/Resulting Table.PNG)
+*Figure 3. Table with Top 6 Countries*
+
+
+## 4.2 Removing Unused Columns
+
+To ensure that the data is insistent with the title and intent, data from year 2019 to 2020 were kept for analysis, while data from the other years are excluded.
+
+![](img/Remove Column.PNG)
+*Figure 4. Removing Unused Columns*
+
+
+![](img/Resulting Table2.PNG)
+*Figure 5. Resulting Table*
+
+
+## 4.3 Renaming Sheet
+
+For better clarity, the excel sheets for import and export were renamed accordingly. This is done so that it will be clearer when the data is imported into Tableu.
+
+
+![](img/Rename Sheet.PNG)
+*Figure 6. Renaming the excel sheets*
+
+
+## 4.4 Edit Relationship
+
+When the file was initially loaded onto Tableau, the import and export data will need to be linked using the common field "variable". In this case we link the *Variables* from both tables which represents each country.
+
+![](img/Linking Data Tables.PNG)
+*Figure 7. Edit Relationship to be by Variable Data Field*
+
+
+## 4.5 Edit Data Type
+
+It was also found that the Import and Export for each country were of string data type. This was not correct was the values should be numeric, thus the data type was amended accordingly.
+
+
+![](img/Changing Data Type.PNG)
+*Figure 8. The Import and Export amount changed from String to Numeric Data Type*
+
+
+## 4.6 Pivot Data
+
+The data from 2019 to 2020 was pivoted to column form and tagged to the respective countries. This was done for both the import and export data. The data type for the pivot table was also changed to date datatype. The Headers were also renamed to "Countries", "Month-Year" and "Import(Thousands)" respectively. The steps were repeated for the export data.
+
+![](img/Pivot.PNG)
+*Figure 9. Selected Columns to apply Pivot*
+
+
+![](img/Pivoted Table.PNG)
+*Figure 10. Changing headers and data types*
+
+
+![](img/Update Relationship.PNG)
+*Figure 11. Update Relationship for Countries and Month-Year*
+
+
+# 5.0 Building the Visualization
+
+On Sheet 1, place the "Month-Year" and "Import (Thousands)" onto the columns and "Export (Thousands)" onto the rows. 
+
+![](img/Rows and Columns.PNG)
+*Figure 12. Place the Dimension and Measures onto the rows and columns*
+
+## 5.1 Details and Labels
+
+The "Country" measure was applied as the labels and details, the marks was changed to "circle" and the size was adjusted slightly smaller with the result as shown.
+
+
+![](img/Details.PNG)
+*Figure 13. Adding Details and Labels to the charts*
+
+
+For this Data Viz Makeover, we want to provide better clarity to the audience on the Import and Export Value, as well as the relative ranking for each Country.
+
+Hence, a new calculated field "Rank by Import" and "Rank by Export" were created using the *RANK_DENSE()* function with the below expression. The 
+
+
+![](img/Calculated Field.PNG)
+*Figure 14. Accessing add Calculated Field function*
+
+
+![](img/Rank by Export.PNG)
+*Figure 15. Expression for Rank_Dense*
+
+
+## 5.2 Tooltip
+
+The tooltip adds additional information to the charts to send a clearer message.
+Information of interest such as the country, import and export amount as well as the respective ranks are added into the tooltip.
+To add in the newly created Calculated Field into the tooltip, both of the calculated fields are dragged into the "tooltip" and compute using "Country".
+
+
+![](img/Rank into Tooltip.PNG)
+*Figure 16. Adding Ranks into Tooltip*
+
+
+The calculated fields are added into the tool tip via the *insert* function. The description was amended to tell a story.
+
+
+![](img/Edit Tooltip.PNG)
+*Figure 17. Details in Tooltip amended to tell a Story*
+
+
+
+## 5.3 Improving Clarity in Values and Percentage Change
+
+At the current state, the import and export values could be confusing to the audience with values like "60M thousand", so the values needed to be adjusted. The data provided was originally in thousands, so we will need to manually create a new calculated field *Export Value* and *Import Value* to show the actual export and import not in units of thousands. The *Rank by Export* and *Rank by Import* calculated field would also need to be amended accordingly using the *Export (Value)* and *Import (Value)* fields.
+
+
+![](img/Export Value.PNG)
+*Figure 18. Create New Calculated Field "Export (Value)"*
+
+
+![](img/Replace Import and Export.PNG)
+*Figure 19. Replace Rows and Columns with New calculated Fields"*
+
+
+The format of the Import and Export needed to be changed for better user experience. To do so, the Import and Export were changed under the *Pane* tab and the *Numbers* changed to *Currency (custom)* with display unit in *Billions*.
+
+
+![](img/Format Import.PNG)
+*Figure 20. Format Changed to Show Import in Billions*
+
+We are interested to find out the change in Import and Export for each country. To do do, we created new calculated fields *Pct Change (Import)* and *Pct Change (Export)* using the values from *Import (Value)* and *Export (Value)* and applied the *Percentage Difference* under *Quick Table Calculation* 
+
+
+![](img/Pct Change.PNG)
+*Figure 22. Pct Change 
+
+
+The percentage change was inserted into the Tooltip.
+
+
+![](img/Updated Tooltip.PNG)
+*Figure 23. Updated Tooltip with New Calculated Fields
+
+
+# 6.0 Final Output
+
+To improve the aesthetics of the visualization, different colors are assigned to each country for ease of comparing the relative position of the country in 2019 and 2020. The field label *Month-Year* was also hidden.The final sheet was placed onto the dashboard as shown below.
+
+![](img/Final Output.PNG)
+*Figure 24. Final Output Visualization*
+
+
+## 6.1 Insights
+
+With the new Data Visualization, three major observations were made below.
+
+  S/N |   Observations      
+------|----------------------------
+  1   | Mainland China had the highest Merchandised Trade in 2019 and 2020 with Import and Export over **$65B** and **$70B** respectively.
+  2   | Hong Kong was consistently the **Rank of 6th** in **Import** but maintained a **Rank of 2** in **Export**.
+  3   | Taiwan had the highest growth among the top six countries with an increase in Import and Export of **13.36%** and **12.42%** respectively.
