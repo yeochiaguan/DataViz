@@ -1,5 +1,5 @@
 ---
-title: "DataViz Makeover 2"
+title: "DataViz Makeover #2"
 description: |
   This is my submission for the Data Viz Makeover Assignment 2 for ISSS608 Visual Analytics and Applications
 author:
