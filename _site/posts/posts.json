@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-07-26-isss608-assignment-1/",
+    "title": "ISSS608 Assignment 1",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Yeo Chia Guan Andy",
+        "url": "https://github.com/yeochiaguan"
+      }
+    ],
+    "date": "2021-07-26",
+    "categories": [],
+    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-07-26T19:50:37+08:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2021-06-10-dataviz-makeover-2/",
     "title": "DataViz Makeover 2",
     "description": "This is my submission for the Data Viz Makeover Assignment 2 for ISSS608 Visual Analytics and Applications",
