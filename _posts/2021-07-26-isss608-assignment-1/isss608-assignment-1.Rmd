@@ -91,3 +91,71 @@ loyalty$timestamp <- date_time_parse(loyalty$timestamp,
                                  zone = "",
                                  format = "%m/%d/%Y")
 ```
+
+# 2.0 Insights
+
+## 2.1 Credit Card and Loyalty Card Transactions 
+
+Using the loyalty card and credit card data, we first explore the popularity of shops by counting the number of visits by location.
+It was found that Katerina's Cafe and Hippokampos were the top 2 most popular shops in terms of the transactions made over the period from 6 Jan to 19 Jan 2014.
+
+
+### 2.1.1 Loyalty Card Usage
+
+```{r}
+#Loyalty Card usage total represented by Loyalty use variable
+loyaltyuse <- loyalty %>%
+  group_by(location) %>%
+  summarize(timesvisit = length(loyaltynum))
+
+loyaltyuse$location=str_replace_all(loyaltyuse$location,"[^[:graph:]]", " ") 
+
+popular_loyalty <- ggplot(loyaltyuse, aes(y = location, x = timesvisit, color = timesvisit)) + geom_point_interactive(aes(tooltip = timesvisit))
+
+girafe(ggobj = popular_loyalty,width_svg = 6,height_svg = 6*0.618)
+
+```
+
+### 2.1.2 Credit Card Usage
+
+```{r}
+#credit Card usage total represented by Loyaltyuse variable
+ccuse <- credit_card %>%
+  group_by(location) %>%
+  summarize(timesvisit = length(last4ccnum))
+
+ccuse$location=str_replace_all(ccuse$location,"[^[:graph:]]", " ") 
+
+popular_cc <- ggplot(ccuse, aes(y = location, x = timesvisit, color = timesvisit)) + geom_point_interactive(aes(tooltip = timesvisit))
+
+girafe(ggobj = popular_cc,width_svg = 6,height_svg = 6*0.618)
+
+```
+
+## 2.2 Visitor per location by day
+
+Next, we next plot the visitor count by day for each location to identify possible trends.
+It was also observed that at least 10 vehicles will visit Brew've Been Served every weekday.
+
+On the credit card data, it was noticed that there was 1 visit to the Daily Dealz and 1 visit to U-pump which were out of the normal pattern. The visit to the Daily Dealz was not captured in the loyalty data, hence it can be inferred that the loyalty card might not be applicable for that store.
+
+
+The data on loyalty card usage collects the date used but not the time, hence it is recommended that the time be collected as well to correctly match the credit card owner and the loyalty card owner to identify the card user.
+
+
+### 2.2.1 Loyalty Card
+
+```{r}
+#Loyalty Card usage by day 
+loyaltyday <- loyalty %>%
+  group_by(timestamp,location) %>%
+  summarize(timesvisit = length(loyaltynum))
+
+loyaltyday$location=str_replace_all(loyaltyday$location,"[^[:graph:]]", " ") 
+
+p <- ggplot(loyaltyday, aes(y = location, x = timestamp, color = timesvisit)) + geom_point_interactive(aes(tooltip = timesvisit))
+
+girafe(ggobj = p,width_svg = 6,height_svg = 6*0.618)
+
+```
+
