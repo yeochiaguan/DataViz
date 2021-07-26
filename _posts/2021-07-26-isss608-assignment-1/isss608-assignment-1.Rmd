@@ -549,3 +549,81 @@ tm_shape(bgmap) +
 ```
 
 
+## 4.2 Finding Patterns from Patronage and Vehicle Data 
+
+Next, we'll try and identify the possible owners of the credit card and loyalty card by filtering the location by date and time.
+For the below charts, we filter the vehicle data to show the vehicle locations by hour, specifically on 6 Jan 2014.
+The method applied was to identify the vehicle id which was present in on the map on a specific hour and cross-reference it to the paronage dataset to identify the credit card transaction made as well as the location.
+
+
+
+```{r}
+
+#Plotting path on 6 Jan
+path_selected_date <- jobtitle_path %>%
+  filter(r > "1" & date == "2014-01-15")
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(path_selected_date) +
+  tm_lines(by = c("id","hour")) #+
+ # tm_facets(by = "hour")
+
+#patronage %>%
+#  filter(date ="2014-01-13")
+
+```
+
+```{r}
+patronage$location <- str_extract(patronage$location, regex("[:alpha:]*[:space:]*[:alpha:]*"))
+DT::datatable(patronage)
+
+```
+
+### Isolated credit card transactions
+
+The below observations using isolated cases could be made using the data from 6 Jan 14:
+
+
+
+time (hr) |Vehicle ID | Location | last4ccnum
+-----|-------|----------|------
+9  | 101 | Kronos Pipe |  9220
+10 |101 | Maximum Iron |  9220
+10 | 107 | Nationwide Refinery |  9735
+15  |104 | Abila Airport | 8642
+20 | 19 | Shoppers | 7688
+
+
+
+The steps above was repeated for all dates to obtain the below list of identified vehicle id, tagged to a credit card number. The rest of the data was not complete as during the process, several of the credit cards were found to be used at a shop where a different vehicle was driven instead. hence the echnique was found to be lacking in terms of the accuracy.
+
+
+Vehicle ID | last4ccnum
+-------|-------
+1 | 2681
+10 | 1321
+12 | 2418
+13 |9735
+14 | 5368
+ 19 |  7688
+ 21 | 8156
+ 24 | 9152 1877
+ 32 | 7688
+ 34 | 2681
+35 | 9551
+101 |   9220
+104 |  8642
+105 | 7792
+107 |   9735
+ 
+
+# 5.0 Future Works
+
+As part of the future work, the network visualisation could be explored to match the credit card transactions to the vehicle id to identify the owners.
+
+
