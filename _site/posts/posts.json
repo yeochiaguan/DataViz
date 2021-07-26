@@ -1,19 +1,19 @@
 [
   {
     "path": "posts/2021-07-26-isss608-assignment-1/",
-    "title": "ISSS608 Assignment 1",
-    "description": "A short description of the post.",
+    "title": "ISSS608 Assignment 1 Part 1",
+    "description": "This post is a submission for ISSS608 Assignment 1, Vast Challenge 2",
     "author": [
       {
         "name": "Yeo Chia Guan Andy",
-        "url": "https://github.com/yeochiaguan"
+        "url": {}
       }
     ],
-    "date": "2021-07-26",
+    "date": "2021-07-25",
     "categories": [],
-    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+    "contents": "\r\nVAST Challenge 2\r\nContent\r\n1.0 Literature Review\r\n[2.0 Insights]\r\n[2.1 Credit Card and Loyalty Card Transactions]\r\n[2.1.1 Loyalty Card Usage]\r\n[2.1.2 Credit Card Usage]\r\n\r\n[2.2 Visitor per location by day]\r\n[2.2.1 Loyalty Card]\r\n[2.2.2 Credit Card]\r\n\r\n[2.3 Total Visits per Store]\r\n\r\n[3.0 Georeferencing]\r\n[4.0 Inferences]\r\n[4.1 Merging Car and GPS Dataset]\r\n[# 4.2 Finding Patterns from Patronage and Vehicle Data ]\r\n\r\n[5.0 Future Works]\r\n1.0 Literature Review\r\nFor the literature review, a sample entry was taken from GitHub on a team who participated in the VAST Challenge 2014, Mini Challenge 2. The team of two was from City University London who performed their analysis using processing and libraries giCentre Utils and geoMap which were written by the giCentre at City University London.\r\nThe team used a map to indicate the coordinates of each vehicle at any point in time using animation. Locations outside of the norm were highlighted to find that there were five unknown locations visited by four security employees.\r\nA possible gap to the for this study would be to identify the credit card owners by inferencing the vehicle dataset with the credit card dataset.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2021-07-26T19:50:37+08:00",
+    "last_modified": "2021-07-26T19:53:30+08:00",
     "input_file": {}
   },
   {
