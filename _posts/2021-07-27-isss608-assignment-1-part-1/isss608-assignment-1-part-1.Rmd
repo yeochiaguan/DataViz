@@ -1,11 +1,9 @@
 ---
-title: "ISSS608 Assignment 1 Part 1"
-description: |
-  This post is a submission for ISSS608 Assignment 1, Vast Challenge 2 part 1
+title: "ISSS608 Assignment 1"
+description: This post is a submission for ISSS608 Assignment 1, Vast Challenge 2
 author:
   - name: Yeo Chia Guan Andy
-    url: {}
-date: 07-27-2021
+date: 07-25-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -16,8 +14,130 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+# VAST Challenge 2
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+# Content
+
+* [1.0 Literature Review]
+
+* [2.0 Insights]
+    + [2.1 Credit Card and Loyalty Card Transactions]
+        + [2.1.1 Loyalty Card Usage]
+        + [2.1.2 Credit Card Usage]
+    + [2.2 Visitor per location by day]
+        + [2.2.1 Loyalty Card]
+        + [2.2.2 Credit Card]
+    + [2.3 Total Visits per Store]
+
+* [3.0 Georeferencing]
+
+* [4.0 Inferences]
+    + [4.1 Merging Car and GPS Dataset]
+    + [# 4.2 Finding Patterns from Patronage and Vehicle Data ]
 
 
+* [5.0 Future Works]
+
+
+# 1.0 Literature Review
+For the literature review, a sample entry was taken from GitHub on a team who participated in the VAST Challenge 2014, Mini Challenge 2. The team of two was from City University London who performed their analysis using processing and libraries giCentre Utils and geoMap which were written by the giCentre at City University London.
+
+The team used a map to indicate the coordinates of each vehicle at any point in time using animation. Locations outside of the norm were highlighted to find that there were five unknown locations visited by four security employees.
+
+A possible gap to the for this study would be to identify the credit card owners by inferencing the vehicle dataset with the credit card dataset.
+
+
+
+```{r}
+# Install Required Packages
+
+packages = c('DT','ggiraph','plotly','tidyverse', 'igraph','tidygraph','ggraph', 'sf',
+             'visNetwork','lubridate','clock',
+             'raster','tmap','clock','st','readr','mapview','ggpubr','greekLetters','widyr','tibble' )
+
+
+for (p in packages){
+  if(!require(p,character.only = T)){
+    install.packages(p)
+  }
+  library(p,character.only = T)
+}
+```
+
+
+```{r}
+# Import Data
+
+car <- read_csv("data/car-assignments.csv")
+gps <- read_csv("data/gps.csv")
+credit_card <- read_csv("data/cc_data.csv")
+loyalty <- read_csv("data/loyalty_data.csv")
+
+```
+
+
+```{r}
+#Clean Credit Card and Loyalty Card Data
+
+#Credit card
+credit_card$last4ccnum <- as.character(credit_card$last4ccnum)
+
+credit_card$timestamp <- date_time_parse(credit_card$timestamp,
+                                 zone = "",
+                                 format = "%m/%d/%Y %H:%M")
+
+#Loyalty Card
+loyalty$timestamp <- date_time_parse(loyalty$timestamp,
+                                 zone = "",
+                                 format = "%m/%d/%Y")
+```
+
+# 2.0 Insights
+
+## 2.1 Credit Card and Loyalty Card Transactions 
+
+Using the loyalty card and credit card data, we first explore the popularity of shops by counting the number of visits by location.
+It was found that Katerina's Cafe and Hippokampos were the top 2 most popular shops in terms of the transactions made over the period from 6 Jan to 19 Jan 2014.
+
+
+### 2.1.1 Loyalty Card Usage
+
+```{r}
+#Loyalty Card usage total represented by Loyalty use variable
+loyaltyuse <- loyalty %>%
+  group_by(location) %>%
+  summarize(timesvisit = length(loyaltynum))
+
+loyaltyuse$location=str_replace_all(loyaltyuse$location,"[^[:graph:]]", " ") 
+
+popular_loyalty <- ggplot(loyaltyuse, aes(y = location, x = timesvisit, color = timesvisit)) + geom_point_interactive(aes(tooltip = timesvisit))
+
+girafe(ggobj = popular_loyalty,width_svg = 6,height_svg = 6*0.618)
+
+```
+
+### 2.1.2 Credit Card Usage
+
+```{r}
+#credit Card usage total represented by Loyaltyuse variable
+ccuse <- credit_card %>%
+  group_by(location) %>%
+  summarize(timesvisit = length(last4ccnum))
+
+ccuse$location=str_replace_all(ccuse$location,"[^[:graph:]]", " ") 
+
+popular_cc <- ggplot(ccuse, aes(y = location, x = timesvisit, color = timesvisit)) + geom_point_interactive(aes(tooltip = timesvisit))
+
+girafe(ggobj = popular_cc,width_svg = 6,height_svg = 6*0.618)
+
+```
+
+## 2.2 Visitor per location by day
+
+Next, we next plot the visitor count by day for each location to identify possible trends.
+It was also observed that at least 10 vehicles will visit Brew've Been Served every weekday.
+
+On the credit card data, it was noticed that there was 1 visit to the Daily Dealz and 1 visit to U-pump which were out of the normal pattern. The visit to the Daily Dealz was not captured in the loyalty data, hence it can be inferred that the loyalty card might not be applicable for that store.
+
+
+The data on loyalty card usage collects the date used but not the time, hence it is recommended that the time be collected as well to correctly match the credit card owner and the loyalty card owner to identify the card user.

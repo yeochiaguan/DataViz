@@ -1,22 +1,5 @@
 [
   {
-    "path": "posts/2021-07-27-isss608-assignment-1-part-1/",
-    "title": "ISSS608 Assignment 1 Part 1",
-    "description": "This post is a submission for ISSS608 Assignment 1, Vast Challenge 2 part 1",
-    "author": [
-      {
-        "name": "Yeo Chia Guan Andy",
-        "url": {}
-      }
-    ],
-    "date": "2021-07-27",
-    "categories": [],
-    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2021-07-27T10:17:42+08:00",
-    "input_file": {}
-  },
-  {
     "path": "posts/2021-07-27-isss608-assignment-1-part-2/",
     "title": "ISSS608 Assignment Part 2",
     "description": "This post is a submission for ISSS608 Assignment 1, Vast Challenge 2 part 2",
@@ -32,6 +15,23 @@
     "preview": {},
     "last_modified": "2021-07-27T10:48:20+08:00",
     "input_file": "isss608-assignment-1-part-2.knit.md"
+  },
+  {
+    "path": "posts/2021-07-27-isss608-assignment-1-part-1/",
+    "title": "ISSS608 Assignment 1",
+    "description": "This post is a submission for ISSS608 Assignment 1, Vast Challenge 2",
+    "author": [
+      {
+        "name": "Yeo Chia Guan Andy",
+        "url": {}
+      }
+    ],
+    "date": "2021-07-25",
+    "categories": [],
+    "contents": "\r\nVAST Challenge 2\r\nContent\r\n1.0 Literature Review\r\n2.0 Insights\r\n2.1 Credit Card and Loyalty Card Transactions\r\n2.1.1 Loyalty Card Usage\r\n2.1.2 Credit Card Usage\r\n\r\n2.2 Visitor per location by day\r\n[2.2.1 Loyalty Card]\r\n[2.2.2 Credit Card]\r\n\r\n[2.3 Total Visits per Store]\r\n\r\n[3.0 Georeferencing]\r\n[4.0 Inferences]\r\n[4.1 Merging Car and GPS Dataset]\r\n[# 4.2 Finding Patterns from Patronage and Vehicle Data ]\r\n\r\n[5.0 Future Works]\r\n1.0 Literature Review\r\nFor the literature review, a sample entry was taken from GitHub on a team who participated in the VAST Challenge 2014, Mini Challenge 2. The team of two was from City University London who performed their analysis using processing and libraries giCentre Utils and geoMap which were written by the giCentre at City University London.\r\nThe team used a map to indicate the coordinates of each vehicle at any point in time using animation. Locations outside of the norm were highlighted to find that there were five unknown locations visited by four security employees.\r\nA possible gap to the for this study would be to identify the credit card owners by inferencing the vehicle dataset with the credit card dataset.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n2.0 Insights\r\n2.1 Credit Card and Loyalty Card Transactions\r\nUsing the loyalty card and credit card data, we first explore the popularity of shops by counting the number of visits by location. It was found that Katerina’s Cafe and Hippokampos were the top 2 most popular shops in terms of the transactions made over the period from 6 Jan to 19 Jan 2014.\r\n2.1.1 Loyalty Card Usage\r\n\r\npreserve28b6dc9cb303c7c6\r\n\r\n2.1.2 Credit Card Usage\r\n\r\npreserve91caf77c5192fa77\r\n\r\n2.2 Visitor per location by day\r\nNext, we next plot the visitor count by day for each location to identify possible trends. It was also observed that at least 10 vehicles will visit Brew’ve Been Served every weekday.\r\nOn the credit card data, it was noticed that there was 1 visit to the Daily Dealz and 1 visit to U-pump which were out of the normal pattern. The visit to the Daily Dealz was not captured in the loyalty data, hence it can be inferred that the loyalty card might not be applicable for that store.\r\nThe data on loyalty card usage collects the date used but not the time, hence it is recommended that the time be collected as well to correctly match the credit card owner and the loyalty card owner to identify the card user.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-07-27T11:00:33+08:00",
+    "input_file": "isss608-assignment-1-part-1.knit.md"
   },
   {
     "path": "posts/2021-06-10-dataviz-makeover-2/",
