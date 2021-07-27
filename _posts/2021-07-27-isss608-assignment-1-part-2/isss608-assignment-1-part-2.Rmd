@@ -196,6 +196,7 @@ tm_shape(bgmap) +
 Next, we'll try and identify the possible owners of the credit card and loyalty card by filtering the location by date and time.
 For the below charts, we filter the vehicle data to show the vehicle locations by hour, specifically on 6 Jan 2014.
 The method applied was to identify the vehicle id which was present in on the map on a specific hour and cross-reference it to the paronage dataset to identify the credit card transaction made as well as the location.
+The chart below is a sample used for the analysis. The charts were assessed by hours to determine the vehicle path by id by hour.
 
 
 
@@ -203,7 +204,7 @@ The method applied was to identify the vehicle id which was present in on the ma
 
 #Plotting path on 6 Jan
 path_selected_date <- jobtitle_path %>%
-  filter(r > "1" & date == "2014-01-15")
+  filter(r > "1" & date == "2014-01-15" & hour == "9")
 tmap_mode("view")
 tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1,g = 2,b = 3,
@@ -212,13 +213,37 @@ tm_shape(bgmap) +
        interpolate = TRUE,
        max.value = 255) +
   tm_shape(path_selected_date) +
-  tm_lines(by = c("id","hour")) #+
+  tm_lines(by = "id") #+
  # tm_facets(by = "hour")
 
 #patronage %>%
 #  filter(date ="2014-01-13")
 
 ```
+Vehicle Path on 15 Jan 14 at 9am
+
+
+```{r}
+
+#Plotting path on 6 Jan
+path_selected_date <- jobtitle_path %>%
+  filter(r > "1" & date == "2014-01-15" & hour == "10")
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(path_selected_date) +
+  tm_lines(by = "id") #+
+ # tm_facets(by = "hour")
+
+#patronage %>%
+#  filter(date ="2014-01-13")
+
+```
+Vehicle Path on 15 Jan 14 at 10am
 
 ```{r}
 patronage$location <- str_extract(patronage$location, regex("[:alpha:]*[:space:]*[:alpha:]*"))
@@ -242,7 +267,7 @@ time (hr) |Vehicle ID | Location | last4ccnum
 
 
 
-The steps above was repeated for all dates to obtain the below list of identified vehicle id, tagged to a credit card number. The rest of the data was not complete as during the process, several of the credit cards were found to be used at a shop where a different vehicle was driven instead. hence the echnique was found to be lacking in terms of the accuracy.
+The steps above was repeated for all dates to obtain the below list of identified vehicle id, tagged to a credit card number. The rest of the data was not complete as during the process, several of the credit cards were found to be used at a shop where a different vehicle was driven instead. hence the technique was found to be lacking in terms of the accuracy.
 
 
 Vehicle ID | last4ccnum
