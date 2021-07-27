@@ -230,6 +230,7 @@ This was an anomaly as the credit card data only showed 212 visitors for Katerin
 ## 2.3 Total Visits per Store
 
 ```{r}
+#Changed facet to comments as Netlify is unable to display facets clearly
 s <- ggplot(ShopTrans, aes(y = location, x = timesvisit, color = timesvisit)) + geom_point_interactive(aes(tooltip = timesvisit)) #+ facet_grid("hour")
   
 girafe(ggobj = s,width_svg = 6,height_svg = 6*0.618)
@@ -514,7 +515,7 @@ jobtitle_path <- cbind(jobtitle_path, r)
 When we group the vehicle data by employment title, we could determine the normal route which each employee would take. From the chart below, we could see the following "unique" paths taken which were out of the norm. These paths can be identified by the weight of the lines which represents the frequency in which the path was taken.
 
 ```{r}
-#plotting the path by Employment Title to identify outliers. The assessment was doen, but it was unable to b published on netlify, hence the bottom part of the code is taken out.
+#plotting the path by Employment Title to identify outliers. The assessment was done, but it was unable to b published on netlify, hence the bottom part of the code is taken out.
 
 path_selected <- jobtitle_path %>%
   filter(r > "1")
