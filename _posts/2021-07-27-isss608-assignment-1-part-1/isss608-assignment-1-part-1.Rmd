@@ -269,10 +269,6 @@ Using the interactive datatable, we could identify the transactions made with th
 #Upon joining the data, an attempted was made to create a DT data table using the to explore the dataset. However, an error was found as there were invalid symbols found in the data. 
 #To address the issue, greeks() function could be aplied, but the result was the first word for each location. Thus, a regular expression was used to filter out none alphabets.
 
-#patronage$locationgreek <- greeks(patronage$location)
-#DT::datatable(patronage)
-
-
 patronage$location <- str_extract(patronage$location, regex("[:alpha:]*[:space:]*[:alpha:]*"))
 DT::datatable(patronage)
 ```
@@ -512,25 +508,39 @@ jobtitle_path <- cbind(jobtitle_path, r)
 
 ```
 
+
+#Path by Employment Title
+
 When we group the vehicle data by employment title, we could determine the normal route which each employee would take. From the chart below, we could see the following "unique" paths taken which were out of the norm. These paths can be identified by the weight of the lines which represents the frequency in which the path was taken.
 
+
+
 ```{r}
+#This code chunk is for displaying Route based on Employment Title, but due to issues showing on netlify, snipshots of the interactive maps are pasted instead.
+
 #plotting the path by Employment Title to identify outliers. The assessment was done, but it was unable to b published on netlify, hence the bottom part of the code is taken out.
 
-path_selected <- jobtitle_path %>%
-  filter(r > "1")
-tmap_mode("view")
-tm_shape(bgmap) +
-  tm_rgb(bgmap, r = 1,g = 2,b = 3,
-       alpha = NA,
-       saturation = 1,
-       interpolate = TRUE,
-       max.value = 255) +
-  tm_shape(path_selected) +
-  tm_lines(by = "id") #+
- # tm_facets(by = "CurrentEmploymentTitle")
+#path_selected <- jobtitle_path %>%
+#  filter(r > "1")
+#tmap_mode("view")
+#tm_shape(bgmap) +
+#  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+#       alpha = NA,
+#       saturation = 1,
+#       interpolate = TRUE,
+#       max.value = 255) +
+#  tm_shape(path_selected) +
+#  tm_lines(by = "id") +
+#  tm_facets(by = "CurrentEmploymentTitle")
 
 ```
+![](img/Facet1.PNG)
+![](img/Facet2.PNG)
+![](img/Facet3.PNG)
+![](img/Facet4.PNG)
+![](img/Facet5.PNG)
+
+
 
 S/N | ID     | Current Employment Title| Remarks
 ----|--------|-----------------------| ----------------------------
