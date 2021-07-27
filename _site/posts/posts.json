@@ -18,7 +18,7 @@
   },
   {
     "path": "posts/2021-07-27-isss608-assignment-1-part-2/",
-    "title": "ISSS608 Assignment 1 Part 2",
+    "title": "ISSS608 Assignment Part 2",
     "description": "This post is a submission for ISSS608 Assignment 1, Vast Challenge 2 part 2",
     "author": [
       {
@@ -28,10 +28,10 @@
     ],
     "date": "2021-07-27",
     "categories": [],
-    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+    "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nReading layer `Abila' from data source \r\n  `C:\\yeochiaguan\\DataViz\\_posts\\2021-07-27-isss608-assignment-1-part-2\\data\\Geospatial' \r\n  using driver `ESRI Shapefile'\r\nSimple feature collection with 3290 features and 9 fields\r\nGeometry type: LINESTRING\r\nDimension:     XY\r\nBounding box:  xmin: 24.82401 ymin: 36.04502 xmax: 24.90997 ymax: 36.09492\r\nGeodetic CRS:  WGS 84\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nVehicle Movement by Employment Type\r\nWhen we look at the pathings by Employment Type, we see a different picture. As observed below, the Employment Type “Missing”, which represents trucks (as identified with id > 100), showed a peculiar route taken. Vehicle ID 107 could be seen travelling pass Pilau Park to Velestinou Boulevard. Vehicle ID 29 from Facilities could also be seen travelling to unique places during the period.\r\n\r\npreservea7df6e007ccc57dd\r\n\r\n4.2 Finding Patterns from Patronage and Vehicle Data\r\nNext, we’ll try and identify the possible owners of the credit card and loyalty card by filtering the location by date and time. For the below charts, we filter the vehicle data to show the vehicle locations by hour, specifically on 6 Jan 2014. The method applied was to identify the vehicle id which was present in on the map on a specific hour and cross-reference it to the paronage dataset to identify the credit card transaction made as well as the location.\r\n\r\npreserve96782fbd35e0b036\r\n\r\n\r\npreserve64341fe81a3462f7\r\n\r\nIsolated credit card transactions\r\nThe below observations using isolated cases could be made using the data from 6 Jan 14:\r\ntime (hr)\r\nVehicle ID\r\nLocation\r\nlast4ccnum\r\n9\r\n101\r\nKronos Pipe\r\n9220\r\n10\r\n101\r\nMaximum Iron\r\n9220\r\n10\r\n107\r\nNationwide Refinery\r\n9735\r\n15\r\n104\r\nAbila Airport\r\n8642\r\n20\r\n19\r\nShoppers\r\n7688\r\nThe steps above was repeated for all dates to obtain the below list of identified vehicle id, tagged to a credit card number. The rest of the data was not complete as during the process, several of the credit cards were found to be used at a shop where a different vehicle was driven instead. hence the echnique was found to be lacking in terms of the accuracy.\r\nVehicle ID\r\nlast4ccnum\r\n1\r\n2681\r\n10\r\n1321\r\n12\r\n2418\r\n13\r\n9735\r\n14\r\n5368\r\n19\r\n7688\r\n21\r\n8156\r\n24\r\n9152 1877\r\n32\r\n7688\r\n34\r\n2681\r\n35\r\n9551\r\n101\r\n9220\r\n104\r\n8642\r\n105\r\n7792\r\n107\r\n9735\r\n5.0 Future Works\r\nAs part of the future work, the network visualisation could be explored to match the credit card transactions to the vehicle id to identify the owners.\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2021-07-27T10:17:49+08:00",
-    "input_file": {}
+    "last_modified": "2021-07-27T10:25:58+08:00",
+    "input_file": "isss608-assignment-1-part-2.knit.md"
   },
   {
     "path": "posts/2021-06-10-dataviz-makeover-2/",

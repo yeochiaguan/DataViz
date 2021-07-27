@@ -1,5 +1,5 @@
 ---
-title: "ISSS608 Assignment 1 Part 2"
+title: "ISSS608 Assignment Part 2"
 description: |
   This post is a submission for ISSS608 Assignment 1, Vast Challenge 2 part 2
 author:
@@ -16,8 +16,256 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+```{r}
+# Install Required Packages
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+packages = c('DT','ggiraph','plotly','tidyverse', 'igraph','tidygraph','ggraph', 'sf',
+             'visNetwork','lubridate','clock',
+             'raster','tmap','clock','st','readr','mapview','ggpubr','greekLetters','widyr','tibble' )
+
+
+for (p in packages){
+  if(!require(p,character.only = T)){
+    install.packages(p)
+  }
+  library(p,character.only = T)
+}
+```
+
+
+```{r}
+# Import Data
+
+car <- read_csv("data/car-assignments.csv")
+gps <- read_csv("data/gps.csv")
+credit_card <- read_csv("data/cc_data.csv")
+loyalty <- read_csv("data/loyalty_data.csv")
+
+```
+
+```{r}
+#Clean Credit Card and Loyalty Card Data
+
+#Credit card
+credit_card$last4ccnum <- as.character(credit_card$last4ccnum)
+
+credit_card$timestamp <- date_time_parse(credit_card$timestamp,
+                                 zone = "",
+                                 format = "%m/%d/%Y %H:%M")
+
+#Loyalty Card
+loyalty$timestamp <- date_time_parse(loyalty$timestamp,
+                                 zone = "",
+                                 format = "%m/%d/%Y")
+```
+
+```{r}
+#Left Join Loyalty Card transactions to credit card
+credit_card$date <- as_date(credit_card$timestamp)
+
+patronage <- credit_card %>%
+  left_join(loyalty, by = c("date" = "timestamp", "location" = "location", "price" = "price"))
+
+```
+
+```{r}
+#Splitting the date time into date, hours and minute
+patronage$date <- as_date(patronage$timestamp)
+patronage$hour <- hour(patronage$timestamp)
+patronage$minute <- minute(patronage$timestamp)
+
+
+
+```
+
+
+```{r}
+# Setting the Map as Background
+bgmap <- raster("data/MC2-tourist_modified.tif")
+
+#tmap_mode("plot")
+#tm_shape(bgmap) + tm_raster(bgmap, legend.show = FALSE)
+
+#tm_shape(bgmap) +
+#tm_rgb(bgmap, r = 1, g = 2, b = 3,
+#       alpha = NA,
+#       saturation = 1,
+#       interpolate = TRUE,
+ #      max.value = 255)
+```
+
+```{r}
+#Importing Abila Shape file into R
+Abila_st <- st_read(dsn = "data/Geospatial", layer = "Abila")
+
+```
+
+
+```{r}
+#merging gps with car
+vehicle <- gps %>%
+  left_join(car, by = c("id" = "CarID"))
+```
+
+```{r}
+vehicle$Timestamp <- date_time_parse(vehicle$Timestamp,
+                                 zone = "",
+                                 format = "%m/%d/%Y %H:%M:%S")
+
+#Convert cars ID into Scalar Data-Type as each ID represents a vehicle
+vehicle$id <- as_factor(vehicle$id)
+
+```
+
+```{r}
+#Splitting Timestamp from vehicle into hours and minutes
+
+vehicle$date <- as_date(vehicle$Timestamp)
+vehicle$hour <- hour(vehicle$Timestamp)
+vehicle$minute <- minute(vehicle$Timestamp)
+
+```
+
+```{r}
+#Convert cars ID into Scalar Data-Type as each ID represents a vehicle
+vehicle$id <- as_factor(vehicle$id)
+
+```
+
+```{r}
+#Simple Frame for GPS data
+vehicle_sf <- st_as_sf(vehicle,
+                   coords = c("long", "lat"),
+                   crs = 4326)
+```
+
+
+```{r}
+#Creating a separate vehicle path by splitting the timestamp
+
+vehicle_sf$date <- as_date(vehicle_sf$Timestamp)
+vehicle_sf$hour <- hour(vehicle_sf$Timestamp)
+vehicle_sf$minute <- minute(vehicle_sf$Timestamp)
+
+```
+
+
+```{r}
+#Vehicle Path by employment type
+jobtitle_path <- vehicle_sf %>%
+  group_by(id,CurrentEmploymentTitle,CurrentEmploymentType,date,hour,minute) %>%
+  summarise(m = mean(Timestamp),
+            do_union=FALSE) %>%
+  st_cast("LINESTRING")
+
+```
+
+```{r} 
+#Remove single coordinates so that a line can be drawn for path data by date
+r = mapview::npts(jobtitle_path, by_feature = TRUE)
+jobtitle_path <- cbind(jobtitle_path, r)
+
+```
+
+### Vehicle Movement by Employment Type
+
+When we look at the pathings by Employment Type, we see a different picture. As observed below, the Employment Type "Missing", which represents trucks (as identified with id > 100), showed a peculiar route taken. Vehicle *ID 107* could be seen travelling pass Pilau Park to Velestinou Boulevard.
+Vehicle *ID 29* from Facilities could also be seen travelling to unique places during the period.
+
+```{r}
+
+#Plotting ppath by Employment Type
+path_selected2 <- jobtitle_path %>%
+  filter(r > "1")
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(path_selected2) +
+  tm_lines(by = "id") +
+  tm_facets(by = "CurrentEmploymentType")
+
+```
+
+
+## 4.2 Finding Patterns from Patronage and Vehicle Data 
+
+Next, we'll try and identify the possible owners of the credit card and loyalty card by filtering the location by date and time.
+For the below charts, we filter the vehicle data to show the vehicle locations by hour, specifically on 6 Jan 2014.
+The method applied was to identify the vehicle id which was present in on the map on a specific hour and cross-reference it to the paronage dataset to identify the credit card transaction made as well as the location.
+
+
+
+```{r}
+
+#Plotting path on 6 Jan
+path_selected_date <- jobtitle_path %>%
+  filter(r > "1" & date == "2014-01-15")
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(path_selected_date) +
+  tm_lines(by = c("id","hour")) #+
+ # tm_facets(by = "hour")
+
+#patronage %>%
+#  filter(date ="2014-01-13")
+
+```
+
+```{r}
+patronage$location <- str_extract(patronage$location, regex("[:alpha:]*[:space:]*[:alpha:]*"))
+DT::datatable(patronage)
+
+```
+
+### Isolated credit card transactions
+
+The below observations using isolated cases could be made using the data from 6 Jan 14:
+
+
+
+time (hr) |Vehicle ID | Location | last4ccnum
+-----|-------|----------|------
+9  | 101 | Kronos Pipe |  9220
+10 |101 | Maximum Iron |  9220
+10 | 107 | Nationwide Refinery |  9735
+15  |104 | Abila Airport | 8642
+20 | 19 | Shoppers | 7688
+
+
+
+The steps above was repeated for all dates to obtain the below list of identified vehicle id, tagged to a credit card number. The rest of the data was not complete as during the process, several of the credit cards were found to be used at a shop where a different vehicle was driven instead. hence the echnique was found to be lacking in terms of the accuracy.
+
+
+Vehicle ID | last4ccnum
+-------|-------
+1 | 2681
+10 | 1321
+12 | 2418
+13 |9735
+14 | 5368
+ 19 |  7688
+ 21 | 8156
+ 24 | 9152 1877
+ 32 | 7688
+ 34 | 2681
+35 | 9551
+101 |   9220
+104 |  8642
+105 | 7792
+107 |   9735
+ 
+
+# 5.0 Future Works
+
+As part of the future work, the network visualisation could be explored to match the credit card transactions to the vehicle id to identify the owners.
 
 
