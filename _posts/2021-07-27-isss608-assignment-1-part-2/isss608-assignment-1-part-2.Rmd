@@ -173,23 +173,27 @@ When we look at the pathings by Employment Type, we see a different picture. As 
 Vehicle *ID 29* from Facilities could also be seen travelling to unique places during the period.
 
 ```{r}
+#Although the charts could be knitted, netlify is unable to display the charts. Hence Just for submission, Images of the charts will be displayed instead.
 
 #Plotting ppath by Employment Type
-path_selected2 <- jobtitle_path %>%
-  filter(r > "1")
-tmap_mode("view")
-tm_shape(bgmap) +
-  tm_rgb(bgmap, r = 1,g = 2,b = 3,
-       alpha = NA,
-       saturation = 1,
-       interpolate = TRUE,
-       max.value = 255) +
-  tm_shape(path_selected2) +
-  tm_lines(by = "id") +
-  tm_facets(by = "CurrentEmploymentType")
+#path_selected2 <- jobtitle_path %>%
+#  filter(r > "1")
+#tmap_mode("view")
+#tm_shape(bgmap) +
+#  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+#       alpha = NA,
+#       saturation = 1,
+#       interpolate = TRUE,
+#       max.value = 255) +
+#  tm_shape(path_selected2) +
+#  tm_lines(by = "id") +
+#  tm_facets(by = "CurrentEmploymentType")
 
 ```
 
+![](img/Engineering&Executive.PNG)
+![](img/Facilities&Information Technology.PNG)
+![](img/Security And Trucks.PNG)
 
 ## 4.2 Finding Patterns from Patronage and Vehicle Data 
 
