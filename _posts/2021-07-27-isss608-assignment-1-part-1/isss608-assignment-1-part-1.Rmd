@@ -510,36 +510,3 @@ r = mapview::npts(jobtitle_path, by_feature = TRUE)
 jobtitle_path <- cbind(jobtitle_path, r)
 
 ```
-
-When we group the vehicle data by employment title, we could determine the normal route which each employee would take. From the chart below, we could see the following "unique" paths taken which were out of the norm. These paths can be identified by the weight of the lines which represents the frequency in which the path was taken.
-
-```{r}
-#plotting the path by Employment Title to identify outliers
-
-path_selected <- jobtitle_path %>%
-  filter(r > "1")
-tmap_mode("view")
-tm_shape(bgmap) +
-  tm_rgb(bgmap, r = 1,g = 2,b = 3,
-       alpha = NA,
-       saturation = 1,
-       interpolate = TRUE,
-       max.value = 255) +
-  tm_shape(path_selected) +
-  tm_lines(by = "id") #+
- # tm_facets(by = "CurrentEmploymentTitle")
-
-```
-
-S/N | ID     | Current Employment Title| Remarks
-----|--------|-----------------------| ----------------------------
-1   | 22     | Badging Office               | 1 Trip through Ermou Street
-2   | 20     | Building Control             | 1 Trip through coffee Chameleon
-3   | 26     | Drill Site Manager           | 1 trip through Androutsu Street and 1 trip around Carnero Street
-4   | 28     | Drill Technician             | For id 28, data is not usable. For id 7, there was a trip near Spetson Street
-5   | 3  |  Engineer                    | 1 trip near Pilau Street
-6   | 14    | Engineering Group Manager    | 1 trip aound Carnero Street
-7   | 35  |  Environmental Safety Adviser | 1 trip near Parla Street and 1 trip near Arkadiou Street
-8   | 29 |  Facilities Group Manager  | 1 trip past Hallowed Grounds and 1 trip past Carlyle Chemical Inc.
-9   | 25 | Geologist | 1 trip past Alberts Fine Clothing
-10 | 19 | Hydraulic Technician | 1 trip past Coffee Shack
