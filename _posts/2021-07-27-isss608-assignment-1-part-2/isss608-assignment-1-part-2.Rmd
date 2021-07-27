@@ -96,7 +96,7 @@ bgmap <- raster("data/MC2-tourist_modified.tif")
 
 ```{r}
 #Importing Abila Shape file into R
-Abila_st <- st_read(dsn = "data/Geospatial", layer = "Abila")
+#Abila_st <- st_read(dsn = "data/Geospatial", layer = "Abila")
 
 ```
 
