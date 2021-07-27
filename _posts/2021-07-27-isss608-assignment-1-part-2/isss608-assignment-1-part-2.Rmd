@@ -1,0 +1,23 @@
+---
+title: "ISSS608 Assignment 1 Part 2"
+description: |
+  This post is a submission for ISSS608 Assignment 1, Vast Challenge 2 part 2
+author:
+  - name: Yeo Chia Guan Andy
+    url: {}
+date: 07-27-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Distill is a publication format for scientific and technical writing, native to the web.
+
+Learn more about using Distill at <https://rstudio.github.io/distill>.
+
+
