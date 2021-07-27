@@ -1,5 +1,5 @@
 ---
-title: "ISSS608 Assignment 1"
+title: "ISSS608 Assignment 1 Part 1"
 description: This post is a submission for ISSS608 Assignment 1, Vast Challenge 2
 author:
   - name: Yeo Chia Guan Andy
@@ -260,4 +260,59 @@ dup2 <- dup %>%
 dup2
 ```
 
+
+Using the interactive datatable, we could identify the transactions made with the above credit card numbers. It was found that the occurrences of using a different loyalty card were more than one.
+
+```{r}
+#Insert Interactive Data Table
+#Upon joining the data, an attempted was made to create a DT data table using the to explore the dataset. However, an error was found as there were invalid symbols found in the data. 
+#To address the issue, greeks() function could be aplied, but the result was the first word for each location. Thus, a regular expression was used to filter out none alphabets.
+
+#patronage$locationgreek <- greeks(patronage$location)
+#DT::datatable(patronage)
+
+
+patronage$location <- str_extract(patronage$location, regex("[:alpha:]*[:space:]*[:alpha:]*"))
+DT::datatable(patronage)
+```
+
+
+
+# 3.0 Georeferencing
+
+For the Mini Challenge, we were given a jpg file of the Akila, Kronos Map which we would use as the background for the locations. To use the geospatial data, we will need to georeference the points on the map image using GIF softwares such as QGIS. 
+For this assignment, the QGIS software was used and to map the points of the shape file to the image file.
+
+First, we were given the Abila.shp file which contained the map information which could be opened in the QGIS application as shown below.
+
+![](img/Abila Base Map.PNG)
+
+Next, to make the map useful, we merge the map data to the given image data using *georeferencer* to indicate the points on the map to the coordinates on the image.
+
+![](img/AddGeoreference.png)
+
+Finally, we apply the georeference to get the final output as shwon below.
+
+![](img/UsableMap.png)
+
+```{r}
+# Setting the Map as Background
+bgmap <- raster("data/MC2-tourist_modified.tif")
+
+tmap_mode("plot")
+tm_shape(bgmap) + tm_raster(bgmap, legend.show = FALSE)
+
+tm_shape(bgmap) +
+tm_rgb(bgmap, r = 1, g = 2, b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255)
+```
+
+```{r}
+#Importing Abila Shape file into R
+Abila_st <- st_read(dsn = "data/Geospatial", layer = "Abila")
+
+```
 
