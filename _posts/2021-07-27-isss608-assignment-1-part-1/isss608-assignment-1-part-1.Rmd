@@ -520,25 +520,21 @@ When we group the vehicle data by employment title, we could determine the norma
 
 #plotting the path by Employment Title to identify outliers. The assessment was done, but it was unable to b published on netlify, hence the bottom part of the code is taken out.
 
-#path_selected <- jobtitle_path %>%
-#  filter(r > "1")
-#tmap_mode("view")
-#tm_shape(bgmap) +
-#  tm_rgb(bgmap, r = 1,g = 2,b = 3,
-#       alpha = NA,
-#       saturation = 1,
-#       interpolate = TRUE,
-#       max.value = 255) +
-#  tm_shape(path_selected) +
-#  tm_lines(by = "id") +
-#  tm_facets(by = "CurrentEmploymentTitle")
+path_selected <- jobtitle_path %>%
+  filter(r > "1")
+tmap_mode("plot")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1,g = 2,b = 3,
+       alpha = NA,
+       saturation = 1,
+       interpolate = TRUE,
+       max.value = 255) +
+  tm_shape(path_selected) +
+  tm_lines(by = "id") +
+  tm_facets(by = "CurrentEmploymentTitle")
 
 ```
-![](img/Facet1.PNG)
-![](img/Facet2.PNG)
-![](img/Facet3.PNG)
-![](img/Facet4.PNG)
-![](img/Facet5.PNG)
+
 
 
 
